@@ -1,0 +1,21 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "User response schema",
+  "type": "object",
+  "properties": {
+    "data": {"type": "array"},
+    "properties": {
+        "businessId": {"type": "number"},
+        "businessName": {"type": "string"},
+        "currencyCode": {"type": "string"},
+        "revenueCenters": {"type":  "list"},
+        "properties": {
+          "revenueCenterId": {"type": "number"},
+          "revenueCenterName": {"type": "string"}
+        },
+      "required": ["revenueCenterId", "revenueCenterName","businessId", "businessName", "currencyCode"],
+      "additionalProperties": false
+    }
+  },
+  "meta": {"type": "object"}
+}
