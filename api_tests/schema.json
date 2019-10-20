@@ -16,6 +16,5 @@
       "required": ["revenueCenterId", "revenueCenterName","businessId", "businessName", "currencyCode"],
       "additionalProperties": false
     }
-  },
-  "meta": {"type": "object"}
+  }
 }

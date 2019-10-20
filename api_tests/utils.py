@@ -53,3 +53,43 @@ def load_json_schema(filename):
 
     with open(absolute_path) as schema_file:
         return json.loads(schema_file.read())
+
+
+def validate_json_for_core_business(response):
+    """Validate json content"""
+    key_list = ['businessId', 'businessName', 'currencyCode', 'revenueCenters']
+    found_keys = []
+    for key, value in response.items():
+        for item in value:
+            for k, v in item.items():
+                # assert all the keys are present
+                if k in key_list and k not in found_keys:
+                    found_keys.append(k)
+
+                # assert value types are correct
+                if k == 'businessId' or k == 'businessName' or k == 'currencyCode':
+                    assert isinstance(v, str)
+                elif k == 'revenueCenters':
+                    assert isinstance(v, list)
+    assert len(key_list) == len(found_keys)
+
+
+def validate_json_for_summary_sales(response):
+    """Validate json content"""
+    key_list = ['organization', 'metrics', 'businessDay', 'currencyCode']
+    found_keys = []
+
+    for key, value in response.items():
+        for item in value:
+            for k, v in item.items():
+                # assert all the keys are present
+                if k in key_list and k not in found_keys:
+                    found_keys.append(k)
+
+                # assert value types are correct
+                if k == 'organization' or k == 'metrics':
+                    assert isinstance(v, dict)
+                elif k == 'businessDay' or k == 'currencyCode':
+                    assert isinstance(v, str)
+
+    assert len(key_list) == len(found_keys)

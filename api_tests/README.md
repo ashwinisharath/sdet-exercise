@@ -3,7 +3,8 @@ The tests are written in pytest framework and need to be run inside a docker con
 Follow the steps below to setup the docker environment and run the tests
 
 ############ Pre-Req ####################################################################
-Needs Docker installation
+Docker installation
+Mock version of the Avero Public API should be running
 
 ############ Building the Docker container ####################################################
 Build the container locally from inside the api_tests directory

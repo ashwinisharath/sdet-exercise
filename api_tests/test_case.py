@@ -2,11 +2,12 @@
 ###############################################################################
 
 """API test cases"""
-
+import json
 from utils import call_api_with_retries
 from utils import pretty_print_request
 from utils import pretty_print_response
 from utils import assert_valid_schema
+from utils import validate_json_for_core_business, validate_json_for_summary_sales
 
 
 INVALID_URL = 'http://127.0.0.1:9000/v1/invalid'
@@ -71,3 +72,27 @@ def test_json_schema():
     json_data = resp.json()
 
     assert_valid_schema(json_data, 'schema.json')
+
+
+def test_json_content_for_core_business():
+    """Validate the JSON response"""
+    url = 'http://127.0.0.1:9000/v1/core/businesses'
+
+    resp = call_api_with_retries().get(url=url, headers=HEADERS)
+    assert resp.status_code == 200
+
+    json_data = json.dumps(resp.json())
+    response = json.loads(json_data)
+    validate_json_for_core_business(response)
+
+
+def test_json_content_for_summary_sales():
+    """Validate the JSON response"""
+    url = 'http://127.0.0.1:9000/v1/sales/summary-sales'
+
+    resp = call_api_with_retries().get(url=url, headers=HEADERS)
+    assert resp.status_code == 200
+
+    json_data = json.dumps(resp.json())
+    response = json.loads(json_data)
+    validate_json_for_summary_sales(response)
